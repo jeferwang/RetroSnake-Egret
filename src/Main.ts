@@ -2,6 +2,10 @@ import Shape = egret.Shape;
 
 class Main extends egret.DisplayObjectContainer {
 
+    snakePoint: Array<any> = [0, 0];  //贪吃蛇头坐标
+    snakeObj: Array<any> = []; //贪吃蛇点集
+    snakeSize: number = 20; //贪吃蛇宽度
+    snakeDirection: number = 1;//+1上 -1下 +2左 -2右
 
     public constructor() {
         super();
@@ -71,7 +75,33 @@ class Main extends egret.DisplayObjectContainer {
         bg_black.graphics.drawRect(0, 0, this.stage.stageWidth, this.stage.stageHeight)
         bg_black.graphics.endFill()
         this.stage.addChild(bg_black)
+        // 第二部分，画蛇
+        this.createSnake()
     }
+
+    private createSnake() {
+        let that = this;
+
+        function draw(point: Array<number>): void {
+            let rect = new Shape();
+            rect.graphics.beginFill(0xffffff)
+            rect.graphics.drawRect(0, 0, 18, 18)
+            rect.graphics.endFill()
+            rect.x = point[0]
+            rect.y = point[1]
+            that.stage.addChild(rect);
+            that.snakeObj.unshift(rect)
+        }
+
+        let next = that.snakePoint
+        draw(that.snakePoint)
+        setInterval(() => {
+            next[0] += 20
+            draw(next)
+            that.stage.removeChild(that.snakeObj.pop())
+        }, 100)
+    }
+
 
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
