@@ -1,0 +1,5 @@
+#IDE Config
+.idea
+.wing
+#compile temp
+bin-debug
