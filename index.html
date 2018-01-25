@@ -81,7 +81,7 @@
              * }
        **/
       egret.runEgret({
-        renderMode: "webgl", audioType: 0, calculateCanvasScaleFactor: function (context) {
+        renderMode: "webgl", retina:true,audioType: 0, calculateCanvasScaleFactor: function (context) {
           var backingStore = context.backingStorePixelRatio ||
             context.webkitBackingStorePixelRatio ||
             context.mozBackingStorePixelRatio ||
